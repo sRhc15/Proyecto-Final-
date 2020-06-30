@@ -1,0 +1,53 @@
+<Window x:Class="Kalum2020v1.Views.AlumnoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kalum2020v1"
+        mc:Ignorable="d"
+        Title="Alumnos" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <DataGrid SelectedItem="{Binding ElementoSeleccionado}" Grid.Row ="0" Grid.ColumnSpan="2" ItemsSource="{Binding ListaAlumno}" 
+            CanUserAddRows="False" ColumnWidth="*" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn Binding ="{Binding Carne }" Header="Carnet" IsReadOnly="true"/>
+                <DataGridTextColumn Binding ="{Binding Apellidos }" Header="Apellidos" IsReadOnly="true"/>
+                <DataGridTextColumn Binding ="{Binding Nombres }" Header="Nombres" IsReadOnly="true"/>
+                <DataGridTextColumn Binding ="{Binding FechaNacimiento }" Header="Fecha Nacimiento" IsReadOnly="true"/>
+            </DataGrid.Columns> 
+        </DataGrid>
+        <Label Grid.Row="1" Grid.Column="0" Content="Carne"/>
+        <TextBox IsReadOnly="{Binding IsReadOnlyCarne}" Grid.Row="1" Grid.Column="1" Text="{Binding ElementoSeleccionado.Carne}" ></TextBox>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Apellidos"/>
+        <TextBox IsReadOnly="{Binding IsReadOnlyApellidos}" Grid.Row="2" Grid.Column="1" Text="{Binding ElementoSeleccionado.Apellidos}" ></TextBox>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Nombres"/>
+        <TextBox IsReadOnly="{Binding IsReadOnlyNombres}" Grid.Row="3" Grid.Column="1" Text="{Binding ElementoSeleccionado.Nombres}" ></TextBox>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Fecha de Nacimiento"/>
+        <DatePicker IsEnabled="{Binding IsReadOnlyFechaNacimiento}" Grid.Row="4" Grid.Column="1" SelectedDate="{Binding ElementoSeleccionado.FechaNacimiento}" />
+
+        <StackPanel Margin="5" Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
+            <Button IsEnabled="{Binding IsNuevo}" Margin="5" Content="Agregar" Command="{Binding Instancia}" CommandParameter="Nuevo"/>
+            <Button IsEnabled="{Binding IsModificar}" Margin="5" Content="Modificar" Command="{Binding Instancia}" CommandParameter="Modificar"/>
+            <Button IsEnabled="{Binding IsEliminar}" Margin="5" Content="Eliminar" Command="{Binding Instancia}" CommandParameter="Eliminar"/>
+            <Button IsEnabled="{Binding IsGuardar}" Margin="5" Content="Guardar" Command="{Binding Instancia}" CommandParameter="Guardar"/>
+            <Button IsEnabled="{Binding IsCancelar}" Margin="5" Content="Cancelar" Command="{Binding Instancia}" CommandParameter="Cancelar"/>
+        </StackPanel>
+    </Grid>
+</Window>
